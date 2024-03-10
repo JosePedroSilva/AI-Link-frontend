@@ -1,6 +1,12 @@
 import { Card } from '@/app/ui/dashboard/cards';
 
-const data = [
+interface CardData {
+  title: string;
+  value: number;
+  type: 'invoices' | 'customers' | 'pending' | 'collected';
+}
+
+const data: CardData[] = [
   { title: 'Invoices', value: 23, type: 'invoices' },
   { title: 'Customers', value: 143828, type: 'customers' },
   { title: 'Pending', value: 182428, type: 'pending' },
