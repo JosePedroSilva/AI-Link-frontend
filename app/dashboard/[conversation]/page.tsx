@@ -1,13 +1,10 @@
-'use client'
-import { useEffect, useState } from "react";
+'use client';
 import { getConversation } from "@/app/lib/data";
 
 export default async function Page({ params }: { params: { conversation: string } }) {
-    const [conversation, setConversation] = useState({});
-    console.log(params.conversation);
-    useEffect(() => {
-        getConversation(params.conversation)
-    }, []);
+    const conversation = await getConversation(params.conversation);
+
+    console.log(conversation);
 
     return (
         <div>
