@@ -1,5 +1,6 @@
 'use client';
 import  { useState, useEffect } from 'react';
+import { getConversations } from '@/app/lib/data';
 
 import {
     HomeIcon,
@@ -12,16 +13,14 @@ import clsx from 'clsx';
 export default function NavLinks() {
     const [links, setLinks] = useState([{ name: 'Home', href: '/dashboard', icon: HomeIcon}]);
     useEffect(() => {
-        fetch('http://localhost:3001/conversations')
-            .then((response) => response.json())
-            .then((data: any[]) => {
-                const newLinks = [...links, ...data.map((conversation) => ({
-                    name: conversation.title,
-                    href: `/dashboard/conversation/${conversation.id}`,
-                    icon: ChatBubbleOvalLeftEllipsisIcon
-                }))];
-                setLinks(newLinks);
-            })
+        getConversations().then((data: any[]) => {
+            const newLinks = [...links, ...data.map((conversation) => ({
+                name: conversation.title,
+                href: `/dashboard/${conversation.id}`,
+                icon: ChatBubbleOvalLeftEllipsisIcon
+            }))];
+            setLinks(newLinks);
+        });
     }, []);
 
     const pathname = usePathname();

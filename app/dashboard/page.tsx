@@ -1,3 +1,4 @@
+'use client';
 import { Card } from '@/app/ui/dashboard/cards';
 
 interface CardData {
